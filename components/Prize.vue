@@ -1,8 +1,8 @@
 <template>
   <section class="prize">
 	<div :style="image"></div>
-  	<h1 class="title">Win a {{ reward.name }}</h1>
-	<redeem :reward="reward" class="redeem"/>
+  	<h1 class="title">Win a {{ prize.name }}</h1>
+	<redeem :prize="prize" class="redeem"/>
   </section>
 </template>
 
@@ -10,14 +10,14 @@
 import Redeem from '~/components/RedeemNav.vue'
 
 export default {
-  props: ['reward'],
+  props: ['prize'],
   components: {
     Redeem
   },
   computed: {
     image () {
       return {
-        background: `url(${this.reward.image_url})`,
+        background: `url(${this.prize.image_url})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
@@ -33,6 +33,9 @@ export default {
 <style scoped>
 .prize{
 	text-align: center;
+        width: 100%;
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 .title{

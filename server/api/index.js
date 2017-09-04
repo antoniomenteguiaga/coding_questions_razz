@@ -1,10 +1,10 @@
 import { Router } from 'express'
 
-import rewards from './rewards'
+import prizes from './prizes'
 
 const router = Router()
 
 // Add USERS Routes
-router.use(rewards)
+router.use(prizes)
 
 export default router

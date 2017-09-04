@@ -1,12 +1,12 @@
 <template>
-	<redeem :to="{ name: 'id', params: { id: reward.id }}" />
+	<redeem :to="{ name: 'id', params: { id: prize._id }}" />
 </template>
 
 <script>
 import Redeem from '~/components/Redeem'
 
 export default {
-  props: ['reward'],
+  props: ['prize'],
   components: {
     Redeem
   }

@@ -2,7 +2,7 @@
   <section class="lightbox">
     <header><h1>Are you sure?</h1></header>
     <div :style="image"></div>
-    <p>Redeem your {{reward.name}}?</p>
+    <p>Redeem your {{prize.name}}?</p>
     <ul>
       <li><button @click="$emit('confirm')">Yes</button></li>
       <li><button @click="$emit('close')">Cancel</button></li>
@@ -13,11 +13,11 @@
 
 <script>
 export default {
-  props: ['reward'],
+  props: ['prize'],
   computed: {
     image () {
       return {
-        background: `url(${this.reward.image_url})`,
+        background: `url(${this.prize.image_url})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',

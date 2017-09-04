@@ -1,11 +1,17 @@
 import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
+import mongoose from 'mongoose'
+import Prize from './models/prize'
+import PrizeSeed from './seeds/prize'
 
 import api from './api'
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
+mongoose.connect(process.env.MONGODB || 'mongodb://localhost/prizes')
+let db=mongoose.connection.db
+
 
 app.set('port', port)
 
@@ -28,6 +34,17 @@ if (config.dev) {
 // Give nuxt middleware to express
 app.use(nuxt.render)
 
-// Listen the server
-app.listen(port, host)
-console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
+db.once('open', function () {
+  db.listCollections().toArray( function(err, names) {
+    if (err) console.log(err)
+    if (names.length <= 0) {
+      //Seed the MongoDB
+      PrizeSeed.forEach( function (prize) {
+        new Prize(prize).save()
+      })
+    }
+  })
+  // Listen the server
+  app.listen(port, host)
+  console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
+})

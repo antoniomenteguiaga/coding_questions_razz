@@ -1,15 +1,17 @@
 <template>
   <section class="lightbox">
     <header><h1>Congratulations!</h1></header>
-    <p>You redeemed your {{reward.name}}?</p>
-    <a href="#">More Prizes</a>
+    <p>You redeemed your {{prize.name}}?</p>
+    <nuxt-link to="/" class="redeem">
+      More Rewards
+    </nuxt-link>
     <button @click="$emit('close')" class="close">&#10060;</button>
   </section>
 </template>
 
 <script>
 export default {
-  props: ['reward']
+  props: ['prize']
 }
 </script>
 

@@ -3,9 +3,9 @@
     <h1 class="title">
 	    Here is the full list of prizes that you can win.
     </h1>
-    <ul class="rewards">
-      <li v-for="reward in rewards" :key="index" class="reward">
-	      <reward :reward="reward" />
+    <ul class="prizes">
+      <li v-for="prize in prizes" :key="index" class="prize">
+	      <prize :prize="prize" />
       </li>
     </ul>
   </section>
@@ -13,26 +13,26 @@
 
 <script>
 import axios from '~/plugins/axios'
-import Reward from '~/components/Reward.vue'
+import Prize from '~/components/Prize.vue'
 
 export default {
   async asyncData () {
-    let { data } = await axios.get('/api/rewards')
-    return { rewards: data }
+    let { data } = await axios.get('/api/prizes')
+    return { prizes: data }
   },
   head () {
     return {
-      title: 'Rewards'
+      title: 'Prizes'
     }
   },
   components: {
-    Reward
+    Prize
   }
 }
 </script>
 
 <style scoped>
-.rewards{
+.prizes{
 	display: flex;
 	list-style:none;
 	flex-direction: column;
@@ -40,20 +40,18 @@ export default {
 	margin: 0;
 }
 
-.reward{
+.prize{
 	width: 100%;
 }
 
 @media all and (min-width: 480px){
-	.rewards{
+	.prizes{
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: space-around;
-		padding: 0.5em;
 	}
 
-	.reward{
-		padding: 1em;
+	.prize{
 		width: 30%;
 	}
 }

@@ -8,7 +8,7 @@
 import Redeem from '~/components/Redeem'
 
 export default {
-  props: ['reward'],
+  props: ['prize'],
   components: {
     Redeem
   }

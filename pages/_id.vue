@@ -1,29 +1,29 @@
 <template>
   <section class="container">
-    <light-box :style="lightBox" :reward="reward" @close="hideLightBox" @confirm="confirmReward"/>
-    <success-light-box :style="successLightBox" :reward="reward" @close="hideSuccessLightBox"/>
+    <light-box :style="lightBox" :prize="prize" @close="hideLightBox" @confirm="confirmPrize"/>
+    <success-light-box :style="successLightBox" :prize="prize" @close="hideSuccessLightBox"/>
     <header>
       <section class="image">
         <div :style="image"></div>
       </section>
       <section class="info">
         <h1>
-          Win a {{ reward.name }}
+          Win a {{ prize.name }}
         </h1>
-        <p>{{reward.quantity}} left in stock</p>
+        <p>{{prize.quantity}} left in stock</p>
         <button @click="showLightBox">Redeem &gt;</button>
       </section>
     </header>
     <section class="description">
       <header><h2>Description</h2></header>
-      <p>{{reward.description}}</p>
+      <p>{{prize.description}}</p>
     </section>
   </section>
 </template>
 
 <script>
 import axios from '~/plugins/axios'
-import Reward from '~/components/Reward.vue'
+import Prize from '~/components/Prize.vue'
 import Redeem from '~/components/RedeemLightBox.vue'
 import LightBox from '~/components/ConfirmationLightBox.vue'
 import SuccessLightBox from '~/components/SuccessLightBox.vue'
@@ -31,7 +31,7 @@ import SuccessLightBox from '~/components/SuccessLightBox.vue'
 export default {
   name: 'id',
   components: {
-    Reward,
+    Prize,
     Redeem,
     LightBox,
     SuccessLightBox
@@ -49,16 +49,22 @@ export default {
     hideSuccessLightBox (event) {
       this.successLightBox.display = 'none'
     },
-    confirmReward (event) {
-      this.lightBox.display = 'none'
-      this.successLightBox.display = 'block'
+    async confirmPrize (event) {
+      try {
+        let { data } = await axios.post(`/api/prizes/${this.prize._id}`)
+        this.prize = data
+        this.lightBox.display = 'none'
+        this.successLightBox.display = 'block'
+      } catch (e) {
+        console.log('Error')
+      }
     }
   },
   async asyncData ({ params, error }) {
     try {
-      let { data } = await axios.get(`/api/rewards/${params.id}`)
+      let { data } = await axios.get(`/api/prizes/${params.id}`)
       return {
-        reward: data,
+        prize: data,
         lightBox: {
           display: 'none'
         },
@@ -75,12 +81,12 @@ export default {
         }
       }
     } catch (e) {
-      error({ statusCode: 404, message: 'Reward not found' })
+      error({ statusCode: 404, message: 'Prize not found' })
     }
   },
   head () {
     return {
-      title: `Reward: ${this.reward.name}`
+      title: `Prize: ${this.prize.name}`
     }
   }
 }
