@@ -1,14 +1,11 @@
 <template>
   <section class="container">
-    <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
     <h1 class="title">
-      REWARDS
+	    Here is the full list of prizes that you can win.
     </h1>
     <ul class="rewards">
-      <li v-for="(reward, index) in rewards" :key="index" class="reward">
-        <nuxt-link :to="{ name: 'id', params: { id: index }}">
-          {{ reward.name }}
-        </nuxt-link>
+      <li v-for="reward in rewards" :key="index" class="reward">
+	      <reward :reward="reward" />
       </li>
     </ul>
   </section>
@@ -16,6 +13,7 @@
 
 <script>
 import axios from '~/plugins/axios'
+import Reward from '~/components/Reward.vue'
 
 export default {
   async asyncData () {
@@ -26,9 +24,37 @@ export default {
     return {
       title: 'Rewards'
     }
+  },
+  components: {
+    Reward
   }
 }
 </script>
 
 <style scoped>
+.rewards{
+	display: flex;
+	list-style:none;
+	flex-direction: column;
+	padding: 0;
+	margin: 0;
+}
+
+.reward{
+	width: 100%;
+}
+
+@media all and (min-width: 480px){
+	.rewards{
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		padding: 0.5em;
+	}
+
+	.reward{
+		padding: 1em;
+		width: 30%;
+	}
+}
 </style>
