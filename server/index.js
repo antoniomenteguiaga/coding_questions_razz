@@ -9,7 +9,7 @@ import api from './api'
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
-mongoose.connect(process.env.MONGODB || 'mongodb://localhost/prizes')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/prizes')
 let db=mongoose.connection.db
 
 
