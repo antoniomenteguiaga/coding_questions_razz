@@ -1,28 +1,32 @@
-html, body
-{
-  background-color: #fff;
-  color: #000;
-  letter-spacing: 0.5px;
-  font-family: "Source Sans Pro", Arial, sans-serif;
-  height: 100vh;
-  margin: 0;
+html{
+	font-family: Verdana, sans-serif;
+}
+body{
+	padding: 0;
+	margin: 0;
+	background: #F3F3F3;
 }
 
-footer
-{
-  padding: 20px;
-  text-align: center;
-  border-top: 1px solid #ddd;
+.button{
+	background-color: yellow;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	border-radius:2em;
+	text-decoration: none;
+	border: none;
+	color: black;
 }
 
-a, a:hover, a:focus, a:visited
-{
-  color: #000;
+.cancel{
+	background-color: grey;
 }
 
-.logo {
-  width: 100%;
-  height: auto;
-  max-width: 400px;
-  max-height: 289px;
+.close{
+	background: none;
+	text-decoration: none;
+	border: none;
+	font-size: 4rem;
+	line-height: 1ex;
+	font-weight: lighter;
+	padding: 0.25ex;
 }

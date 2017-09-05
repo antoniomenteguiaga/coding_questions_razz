@@ -1,8 +1,8 @@
 <template>
   <section class="background">
     <section class="lightbox">
-      <header><h1>Congratulations!</h1></header>
-      <p>You redeemed your {{prize.name}}.</p>
+      <header><h1>Sorry!</h1></header>
+      <p>We ran out of {{prize.name}}.</p>
       <nuxt-link to="/" class="button redeem">
         More Prizes
       </nuxt-link>

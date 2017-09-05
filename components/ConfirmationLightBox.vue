@@ -5,10 +5,10 @@
       <div :style="image"></div>
       <p>Redeem your {{prize.name}}?</p>
       <ul>
-        <li><button @click="$emit('confirm')">Yes</button></li>
-        <li><button @click="$emit('close')">Cancel</button></li>
+        <li><button @click="$emit('confirm')" class="button">Yes</button></li>
+        <li><button @click="$emit('close')" class="button cancel">Cancel</button></li>
       </ul>
-      <button @click="$emit('close')" class="close">&#10060;</button>
+      <button @click="$emit('close')" class="close">&#10006;</button>
     </section>
   </section>
 </template>
@@ -23,9 +23,10 @@ export default {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        height: '12em',
-        width: '12em',
-        borderRadius: '50%'
+        height: '12rem',
+        width: '12rem',
+        borderRadius: '50%',
+        margin: 'auto'
       }
     }
   }
@@ -51,10 +52,10 @@ export default {
   top: 50%;
   transform: translate(-50%,-50%);
   background: white;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  padding-left: 3em;
-  padding-right: 3em;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
   border-radius: 0.25em;
 }
 .lightbox>ul{
@@ -68,6 +69,9 @@ export default {
   position: fixed;
   right: 0;
   top: 0;
-  text-decoration: none;
+}
+.button{
+  width: 7rem;
+  margin: 1rem;
 }
 </style>

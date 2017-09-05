@@ -2,6 +2,7 @@
   <section class="container">
     <light-box :style="lightBox" :prize="prize" @close="hideLightBox" @confirm="confirmPrize"/>
     <success-light-box :style="successLightBox" :prize="prize" @close="hideSuccessLightBox"/>
+    <failure-light-box :style="failureLightBox" :prize="prize" @close="hideFailureLightBox"/>
     <header>
       <section class="image">
         <div :style="image"></div>
@@ -10,8 +11,8 @@
         <h1>
           Win a {{ prize.name }}
         </h1>
+        <button class="redeem button" @click="showLightBox">Redeem &gt;</button>
         <p>{{prize.quantity}} left in stock</p>
-        <button @click="showLightBox">Redeem &gt;</button>
       </section>
     </header>
     <section class="description">
@@ -27,6 +28,7 @@ import Prize from '~/components/Prize.vue'
 import Redeem from '~/components/RedeemLightBox.vue'
 import LightBox from '~/components/ConfirmationLightBox.vue'
 import SuccessLightBox from '~/components/SuccessLightBox.vue'
+import FailureLightBox from '~/components/FailureLightBox.vue'
 
 export default {
   name: 'id',
@@ -34,7 +36,8 @@ export default {
     Prize,
     Redeem,
     LightBox,
-    SuccessLightBox
+    SuccessLightBox,
+    FailureLightBox
   },
   methods: {
     showLightBox (event) {
@@ -49,6 +52,12 @@ export default {
     hideSuccessLightBox (event) {
       this.successLightBox.display = 'none'
     },
+    showFailureLightBox (event) {
+      this.failureLightBox.display = 'block'
+    },
+    hideFailureLightBox (event) {
+      this.failureLightBox.display = 'none'
+    },
     async confirmPrize (event) {
       try {
         let { data } = await axios.post(`/api/prizes/${this.prize._id}`)
@@ -56,7 +65,8 @@ export default {
         this.lightBox.display = 'none'
         this.successLightBox.display = 'block'
       } catch (e) {
-        console.log('Error')
+        this.lightBox.display = 'none'
+        this.failureLightBox.display = 'block'
       }
     }
   },
@@ -71,12 +81,15 @@ export default {
         successLightBox: {
           display: 'none'
         },
+        failureLightBox: {
+          display: 'none'
+        },
         image: {
           background: `url(${data.image_url})`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          height: '12em',
+          paddingTop: '100%',
           width: '100%'
         }
       }
@@ -98,8 +111,39 @@ export default {
   flex-direction: column;
 }
 .redeem{
-  padding-left: 3em;
-  padding-right: 3em;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.info{
+  background: white;
+  border-radius: 0.25rem;
+  box-shadow: 0.1rem 0.1rem 0.05rem 0rem grey;
+  padding: 1em;
+  display: table;
+}
+.info>h1{
+  border-bottom: 0.1rem solid grey;
+  padding-bottom: 2rem;
+  font-size: 1.5rem;
+  margin: 0;
+}
+.info>p{
+  border-top: 0.1rem solid grey;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  font-size: 0.75rem;
+  margin: 0;
+}
+.description *{
+  margin: 0;
+  padding: 0;
+}
+.description{
+  border-top: 0.1rem solid grey;
+  padding-top: 3rem;
+  margin-top: 3rem;
 }
 
 @media (min-width:480px){
@@ -111,6 +155,7 @@ export default {
   .container>header{
     display: flex;
     width: 100%;
+    justify-content: space-between;
   }
 
   .container>section{
@@ -118,11 +163,14 @@ export default {
   }
 
   .image{
-    width: 50%;
+    width: 45%;
   }
 
   .info{
-    width: 50%;
+    width: 45%;
+  }
+  .description > header{
+    margin-right: 3em;
   }
 }
 </style>

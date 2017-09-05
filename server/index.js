@@ -33,6 +33,10 @@ if (config.dev) {
 
 // Give nuxt middleware to express
 app.use(nuxt.render)
+app.use(function (err, req, res, next) {
+    console.error(err.stack) //TODO Replace with an email to a ticketing system
+    res.status(500).send('Something broke!')
+})
 
 db.once('open', function () {
   db.listCollections().toArray( function(err, names) {

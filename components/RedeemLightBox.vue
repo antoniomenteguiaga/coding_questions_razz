@@ -1,5 +1,5 @@
 <template>
-  <a href="#" class="redeem">
+  <a href="#" class="button">
     Redeem &gt;
   </a>
 </template>
@@ -16,11 +16,4 @@ export default {
 </script>
 
 <style scoped>
-.redeem{
-	background-color: yellow;
-	padding-top: 1em;
-	padding-bottom: 1em;
-	border-radius:2em;
-	text-decoration: none;
-}
 </style>

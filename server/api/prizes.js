@@ -7,9 +7,9 @@ const router = Router()
 router.get('/prizes', function (req, res, next) {
   Prize.find( function (err, prizes) {
     if (err) {
-      throw err
+      return next(err)
     }
-    res.json(prizes)
+    return res.json(prizes)
   })
 })
 
@@ -18,9 +18,9 @@ router.get('/prizes/:id', function (req, res, next) {
   const id = req.params.id
   Prize.findById(id, function (err, prize) {
     if (err) {
-      throw err
+      return next(err)
     }
-    res.json(prize)
+    return res.json(prize)
   })
 })
 
@@ -28,18 +28,18 @@ router.post('/prizes/:id', function (req, res, next) {
   const id = req.params.id
   Prize.findById(id, function (err, prize) {
     if (err) {
-      throw err
+      return next(err)
     }
     if(prize.quantity > 0){
       prize.quantity--
     }else{
-      throw new Error('Out of Product')
+      return next(new Error('Out of Product'))
     }
     prize.save( function (err) {
       if (err) {
-        throw err
+        return next(err)
       }
-      res.json(prize)
+      return res.json(prize)
     })
   })
 })

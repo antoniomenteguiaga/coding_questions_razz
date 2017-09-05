@@ -1,5 +1,5 @@
 <template>
-        <nuxt-link :to="to" class="redeem">
+        <nuxt-link :to="to" class="button">
 		Redeem &gt;
         </nuxt-link>
 </template>
@@ -11,11 +11,4 @@ export default {
 </script>
 
 <style scoped>
-.redeem{
-	background-color: yellow;
-	padding-top: 1em;
-	padding-bottom: 1em;
-	border-radius:2em;
-	text-decoration: none;
-}
 </style>

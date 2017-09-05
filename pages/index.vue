@@ -43,6 +43,11 @@ export default {
 .prize{
 	width: 100%;
 }
+.title{
+  margin: 0;
+  text-align: center;
+  font-weight: lighter;
+}
 
 @media all and (min-width: 480px){
 	.prizes{

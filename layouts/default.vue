@@ -1,8 +1,10 @@
 <template>
   <div>
-    <my-header/>
-    <nuxt/>
-    <my-footer/>
+    <div class="fitScreen">
+      <my-header/>
+        <nuxt class="nuxt"/>
+        <my-footer class="footer"/>
+    </div>
   </div>
 </template>
 
@@ -19,4 +21,12 @@ export default {
 </script>
 
 <style>
+.fitScreen{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.nuxt{
+  flex: 1;
+}
 </style>
