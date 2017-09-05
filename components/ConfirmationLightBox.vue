@@ -1,13 +1,15 @@
 <template>
-  <section class="lightbox">
-    <header><h1>Are you sure?</h1></header>
-    <div :style="image"></div>
-    <p>Redeem your {{prize.name}}?</p>
-    <ul>
-      <li><button @click="$emit('confirm')">Yes</button></li>
-      <li><button @click="$emit('close')">Cancel</button></li>
-    </ul>
-    <button @click="$emit('close')" class="close">&#10060;</button>
+  <section class="background">
+    <section class="lightbox">
+      <header><h1>Are you sure?</h1></header>
+      <div :style="image"></div>
+      <p>Redeem your {{prize.name}}?</p>
+      <ul>
+        <li><button @click="$emit('confirm')">Yes</button></li>
+        <li><button @click="$emit('close')">Cancel</button></li>
+      </ul>
+      <button @click="$emit('close')" class="close">&#10060;</button>
+    </section>
   </section>
 </template>
 
@@ -31,6 +33,14 @@ export default {
 </script>
 
 <style scoped>
+.background{
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 .lightbox{
   display: flex;
   flex-direction: column;
@@ -40,6 +50,12 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
+  background: white;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 3em;
+  padding-right: 3em;
+  border-radius: 0.25em;
 }
 .lightbox>ul{
   display: flex;
